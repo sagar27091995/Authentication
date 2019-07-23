@@ -16,9 +16,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(form: NgForm){
     const loginData = form.value;
-    const username = loginData.Username;
-    const password = loginData.Password;
 
-    this.Auth.getUserDetails(username, password)
+    this.Auth.loginUserDetails(loginData)
   }
 }

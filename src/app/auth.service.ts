@@ -1,14 +1,31 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  getUserDetails(username, password){
-    //Post the detailes to API server and return if it correct 
-    console.log('ssss',username, password)
+  loginUserDetails(loginData){
+    //Post the detailes to API server 
+    console.log('loginvalues',loginData)
+    this.http.post('http://localhost:5000/login', loginData)
+    .subscribe(response =>{
+      console.log(response);
+      this.router.navigate(['./dashboard']);
+    })
+  }
+
+  registerDetails(registerData: any){
+    //Post the detailes to API server 
+    console.log('registervalues',registerData)
+    this.http.post('http://localhost:5000/register', registerData)
+    .subscribe(response =>{
+      console.log(response);
+      this.router.navigate(['./login']);
+    })
   }
 }
